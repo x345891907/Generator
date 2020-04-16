@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.member.dao.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.member.entity.Users" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="IDnumber" property="idnumber" jdbcType="CHAR" />
+    <result column="Usercount" property="usercount" jdbcType="CHAR" />
+    <result column="password" property="password" jdbcType="CHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.member.entity.Users" >
+    insert into users (id, IDnumber, Usercount, 
+      password)
+    values (#{id,jdbcType=INTEGER}, #{idnumber,jdbcType=CHAR}, #{usercount,jdbcType=CHAR}, 
+      #{password,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.member.entity.Users" >
+    update users
+    set IDnumber = #{idnumber,jdbcType=CHAR},
+      Usercount = #{usercount,jdbcType=CHAR},
+      password = #{password,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, IDnumber, Usercount, password
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, IDnumber, Usercount, password
+    from users
+  </select>
+</mapper>
